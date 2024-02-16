@@ -48,9 +48,14 @@ export class TrackService {
 		const comment = await this.commentModel.create({
 			...dto,
 		});
-		// @ts-ignore
-		track.comments.push(comment._id);
+		track.comments.push(comment._id as unknown as ObjectId);
 		await track.save();
 		return comment;
+	}
+
+	async listen(id: ObjectId) {
+		const track = await this.trackModel.findById(id);
+		track.listens += 1;
+		track.save();
 	}
 }
