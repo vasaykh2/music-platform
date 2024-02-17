@@ -7,6 +7,7 @@ import {
 	Post,
 	UploadedFiles,
 	UseInterceptors,
+	Query,
 } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { TrackService } from './track.service';
@@ -31,8 +32,8 @@ export class TrackController {
 	}
 
 	@Get()
-	getAll() {
-		return this.trackService.getAll();
+	getAll(@Query('count') count: number, @Query('offset') offset: number) {
+		return this.trackService.getAll(count, offset);
 	}
 
 	@Get(':id')

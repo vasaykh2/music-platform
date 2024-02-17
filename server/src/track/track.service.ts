@@ -15,7 +15,11 @@ export class TrackService {
 		private fileService: FileService,
 	) {}
 
-	async create(dto: CreateTrackDto, picture, audio): Promise<Track> {
+	async create(
+		dto: CreateTrackDto,
+		picture: File,
+		audio: File,
+	): Promise<Track> {
 		const audioPath = this.fileService.createFile(FileType.AUDIO, audio);
 		const picturePath = this.fileService.createFile(FileType.IMAGE, picture);
 
@@ -28,8 +32,8 @@ export class TrackService {
 		return track;
 	}
 
-	async getAll(): Promise<Track[]> {
-		const tracks = await this.trackModel.find();
+	async getAll(count = 10, offset = 0): Promise<Track[]> {
+		const tracks = await this.trackModel.find().skip(offset).limit(count);
 		return tracks;
 	}
 
