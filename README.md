@@ -1,9 +1,12 @@
 music-platform
 
-Для запуска:
-В директории client выполнить
+Для запуска в dev-режиме клиента:
+в директории client выполнить
+npm run dev
+
+(или в prod:
 npm run build
-npm run start
+npm run start)
 
 Клиент запустится на http://localhost:3000
 
